@@ -48,9 +48,7 @@ protected:
 		balance = balance + amt;
 		std::string fees = get_fees();
 		Transaction *tran = NULL;
-
-		// FIXME: Create a Transaction object and assign it to the transaction vector.
-
+		tran = new Transaction(account_number, "Interest", amt, fees);
 		transactions.push_back(tran);
 	}
 
@@ -115,9 +113,7 @@ public:
 		balance += amt;
 		std::string fees = get_fees();
 		Transaction *tran = NULL;
-
-		// FIXME: Create a Transaction object and assign it to transaction vector.
-
+		tran = new Transaction(account_number, "Deposit", amt, fees);
 		transactions.push_back(tran);
 	}
 
@@ -129,9 +125,7 @@ public:
 		balance -= amt;
 		std::string fees = get_fees();
 		Transaction *tran = NULL;
-
-		// FIXME: Create a Transaction object and assign it to tran.
-
+		tran = new Transaction(account_number, "Withdrawal", amt, fees);
 		transactions.push_back(tran);
 	}
 
@@ -139,7 +133,4 @@ public:
 	virtual void add_interest() = 0;
 
 };
-
-
-
 #endif

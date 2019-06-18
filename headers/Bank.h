@@ -31,8 +31,10 @@ private:
 	{
 		std::vector<int> user_accounts;
 
-		// FIXME: Find all the accounts belonging to a customer name and add it to the vector of account numbers.
-		
+		for( int i = 0; i < accounts.size(); i++)
+			if( accounts[i]->get_customer()->get_name() == name )
+				user_accounts.push_back(accounts[i]->get_account());
+
 		return user_accounts;
 	}
 
@@ -43,7 +45,9 @@ private:
 	*/
 	Customer *find_customer(std::string name)
 	{
-		// FIXME: Find and return the Customer object with the parameter name
+		for( int i = 0; i < accounts.size(); i++)
+			if(accounts[i]->get_customer()->get_name() == name)
+				return accounts[i]->get_customer();
 		return NULL;
 	}
 
@@ -57,8 +61,21 @@ private:
 	{
 		Account *acct = NULL;
 
-		// FIXME: Factory method for creating a Account object (could be a Saving_Account or a Checking_Account).
-		
+		if(cust->getCustType() == "senior" && account_type == "checking"){
+			//acct = new Account(cust)
+		}else if(cust->getCustType() == "senior" && account_type == "savings"){
+
+		}else if(cust->getCustType() == "adult" && account_type == "checking"){
+
+		}else if(cust->getCustType() == "adult" && account_type == "savings"){
+
+		}else if(cust->getCustType() == "student" && account_type == "checking"){
+
+		}else if(cust->getCustType() == "student" && account_type == "savings"){
+
+		}else{
+			cout << "Error\n";
+		}	
 		return acct;
 	}
 
@@ -96,8 +113,15 @@ public:
 	{
 		Customer *cust;
 		
-		// FIXME: Depending on the customer type, we want to create an Adult, Senior, or Student object.
-
+		if(cust_type == "senior"){
+			cust = new Customer(name, address, telephone, age, cust_type, customer_id);
+		}else if(cust_type == "adult"){
+			cust = new Customer(name, address, telephone, age, cust_type, customer_id);
+		}else if(cust_type == "student"){
+			cust = new Customer(name, address, telephone, age, cust_type, customer_id);
+		}else{
+			cout << "Error\n";
+		}
 		customers.push_back(cust);
 		return add_account(cust, account_type);
 	}
@@ -111,7 +135,9 @@ public:
 	{
 		Account *acct = get_account(acct_number);
 		if (acct) {
-			// FIXME: Deposit the amt in the account
+			acct->deposit(amt);
+		} else{
+			cout << "Error \n";
 		}
 	}
 
@@ -124,7 +150,9 @@ public:
 	{
 		Account *acct = get_account(acct_number);
 		if (acct) {
-			// FIXME: Withdraw the amt from the account
+			acct->withdraw(amt);
+		}else{
+			cout << "Error\n";
 		}
 	}
 
