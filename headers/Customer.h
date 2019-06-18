@@ -10,35 +10,29 @@ as well as its own checking and overdraft fees.
 
 @author: Ed Walker
 */
-class Customer // FIXME: Complete the implementation!
+class Customer
 {
     private:
     std::string name;
     std::string address;
     std::string telephone_number;
     int age;
-    std::string cust_type;
     std::string customer_number;
 
     public:
-    Customer(std::string name, std::string address, std::string telephone_number, int age, std::string cust_type, int customer_number){
+    Customer(std::string name, std::string address, std::string telephone_number, int age, int customer_number){
         this->name = name;
         this->address = address;
         this->telephone_number = telephone_number;
         this->age = age;
-        this->cust_type = cust_type;
         this->customer_number = customer_number;
     }
 
-    string getCustType(){
-        return cust_type;
-    }
-
-    string get_name(){
+    std::string get_name(){
         return name;
     }
 
-    string get_address(){
+    std::string get_address(){
         return address;
     }
 
@@ -46,11 +40,11 @@ class Customer // FIXME: Complete the implementation!
         return age;
     }
 
-    string get_telephone_number(){
+    std::string get_telephone_number(){
         return telephone_number;
     }
 
-    string get_customer_number(){
+    std::string get_customer_number(){
         return customer_number;
     }
 
@@ -70,9 +64,6 @@ class Customer // FIXME: Complete the implementation!
         this->telephone_number = telephone_number;
     }
 
-    void set_cust_type(std::string cust_type){
-        this->cust_type = cust_type;
-    }
 
     void set_customer_number(int customer_number){
         this->customer_number = customer_number;

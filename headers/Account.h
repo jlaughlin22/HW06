@@ -97,9 +97,11 @@ public:
 	*/
 	virtual std::string to_string() {
 		std::stringstream ss; // for composing the string that describes this account
-
-		// FIXME: Add information about the customer who owns this account.
-		
+		ss << "Name: " << customer->get_name() << std::endl;
+		ss << " Age: " << customer->get_age() << std:: endl;
+		ss << " Address: " << customer->get_address() << std::endl;
+		ss << " Telephone Number: " << customer->get_telephone_number() << std::endl;
+		ss << " Type of Customer: " << customer->getCustType() << std::endl;
 		ss << "  Balance: " << balance << std::endl;
 		ss << "  Account ID: " << account_number << std::endl;
 		return ss.str();

@@ -3,7 +3,15 @@
 #include <vector>
 #include <stdexcept>
 #include "Account.h"
+#include "Checking.h"
+#include "Savings.h"
 #include "Customer.h"
+#include "Senior.h"
+#include "Adult.h"
+#include "Student.h"
+#include <ctime>
+#include <cstdlib>
+#include <typeinfo>
 
 /**
 The CS273 Bank has Accounts and Customers
@@ -61,25 +69,23 @@ private:
 	{
 		Account *acct = NULL;
 
-		if(cust->getCustType() == "senior" && account_type == "checking"){
-			//acct = new Account(cust)
-		}else if(cust->getCustType() == "senior" && account_type == "savings"){
-
-		}else if(cust->getCustType() == "adult" && account_type == "checking"){
-
-		}else if(cust->getCustType() == "adult" && account_type == "savings"){
-
-		}else if(cust->getCustType() == "student" && account_type == "checking"){
-
-		}else if(cust->getCustType() == "student" && account_type == "savings"){
-
-		}else{
-			cout << "Error\n";
-		}	
+		if(typeid(*(cust)) == typeid(Senior) && account_type == "checking"){
+			acct = new Checking_Account(cust, account_id);
+		}else if(typeid(*(cust)) == typeid(Senior)  && account_type == "savings"){
+			acct = new Savings_Account(cust, account_id);
+		}else if(typeid(*(cust)) == typeid(Adult)  && account_type == "checking"){
+			acct = new Checking_Account(cust, account_id);
+		}else if(typeid(*(cust)) == typeid(Adult)  && account_type == "savings"){
+			acct = new Savings_Account(cust, account_id);
+		}else if(typeid(*(cust)) == typeid(Student)  && account_type == "checking"){
+			acct = new Checking_Account(cust, account_id);
+		}else if(typeid(*(cust)) == typeid(Student)  && account_type == "savings"){
+			acct = new Savings_Account(cust, account_id);
+		}
 		return acct;
 	}
 
-public:
+public:	
 	/** Constructor
 	*/
 	Bank() : account_id(1000), customer_id(1000) {}
@@ -114,13 +120,11 @@ public:
 		Customer *cust;
 		
 		if(cust_type == "senior"){
-			cust = new Customer(name, address, telephone, age, cust_type, customer_id);
+			cust = new Senior(name, address, telephone, age, customer_id);
 		}else if(cust_type == "adult"){
-			cust = new Customer(name, address, telephone, age, cust_type, customer_id);
+			cust = new Adult(name, address, telephone, age, customer_id);
 		}else if(cust_type == "student"){
-			cust = new Customer(name, address, telephone, age, cust_type, customer_id);
-		}else{
-			cout << "Error\n";
+			cust = new Student(name, address, telephone, age, customer_id);
 		}
 		customers.push_back(cust);
 		return add_account(cust, account_type);
@@ -136,9 +140,7 @@ public:
 		Account *acct = get_account(acct_number);
 		if (acct) {
 			acct->deposit(amt);
-		} else{
-			cout << "Error \n";
-		}
+		} 
 	}
 
 	/** 
@@ -151,8 +153,6 @@ public:
 		Account *acct = get_account(acct_number);
 		if (acct) {
 			acct->withdraw(amt);
-		}else{
-			cout << "Error\n";
 		}
 	}
 
