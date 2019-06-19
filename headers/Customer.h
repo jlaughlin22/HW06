@@ -13,14 +13,15 @@ as well as its own checking and overdraft fees.
 class Customer
 {
     private:
-    std::string name;
-    std::string address;
-    std::string telephone_number;
-    int age;
-    int customer_number;
-    std::string cust_type;
+    std::string name;//name of customer
+    std::string address;//address of customer
+    std::string telephone_number;//telephone number of customer
+    int age;//age of customer
+    int customer_number;//thier id number
+    std::string cust_type;//type of customer ie senior student adult
 
     public:
+    //constructor
     Customer(std::string name, std::string address, std::string telephone_number, int age, int customer_number){
         this->name = name;
         this->address = address;
@@ -28,7 +29,7 @@ class Customer
         this->age = age;
         this->customer_number = customer_number;
     }
-
+    //constructor
     Customer(std::string name, std::string address, std::string telephone_number, int age, int customer_number, std::string cust_type){
         this->name = name;
         this->address = address;
@@ -37,6 +38,8 @@ class Customer
         this->customer_number = customer_number;
         this->cust_type = cust_type;
     }
+
+    //accesor methods/modify methods
 
     std::string get_name(){
         return name;
@@ -81,6 +84,7 @@ class Customer
     void set_customer_number(int customer_number){
         this->customer_number = customer_number;
     }
+    //virtual methods
     virtual double get_check_charge() = 0;
     virtual double get_overdraft() = 0;
     virtual double get_savings_interest() = 0;
