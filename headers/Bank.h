@@ -43,7 +43,6 @@ private:
 				user_accounts.push_back(accounts[i]->get_account());
 			}
 		}
-		std::cout << user_accounts.size();
 		return user_accounts;
 	}
 
@@ -175,7 +174,6 @@ public:
 	{
 		for (size_t i = 0; i < accounts.size(); i++){
 			if (accounts[i]->get_account() == acct_number)
-				std::cout << "";
 				return accounts[i];
 		}
 		return NULL;
