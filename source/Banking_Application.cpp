@@ -97,7 +97,8 @@ void List_Account(Bank &bank)
 	for (size_t i = 0; i < list.size(); i++) {
 		Account *acct = bank.get_account(list[i]);
 		if (acct)
-			cout << acct->to_string() ;
+			cout<<"test";
+			cout << acct->to_string();
 		cout << "---------------------------\n";
 	}
 	cout << "Total " << list.size() << " accounts found\n";

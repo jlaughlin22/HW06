@@ -82,6 +82,7 @@ private:
 		}else if(cust->get_cust_type() == "student" && account_type == "savings"){
 			acct = new Savings_Account(cust, account_id);
 		}
+		accounts.push_back(acct);
 		return acct;
 	}
 
@@ -137,18 +138,10 @@ public:
 	*/
 	void make_deposit(int acct_number, double amt) 
 	{
-		std::cout << "TEST\n";
 		Account *acct = get_account(acct_number);
-		//for(int i = 0; i < customers.size(); i++){
-			std::cout << "TEST\n";
-			//if ((customers[i]->get_customer_number()) == acct->get_account()) {
-				acct->deposit(amt);
-				
-				//accounts[i]->get_balance();
-				return;
-			//}
-		//}
-		
+		if (acct) {
+			acct->deposit(amt);
+		}
 	}
 
 	/** 
@@ -158,10 +151,8 @@ public:
 	*/
 	void make_withdrawal(int acct_number, double amt) 
 	{
-		
 		Account *acct = get_account(acct_number);
 		if (acct) {
-			std::cout << "TEST\n";
 			acct->withdraw(amt);
 		}
 	}
@@ -176,7 +167,7 @@ public:
 		return find_accounts_by_name(name);
 	}
 
-	/**
+/**
 	Get the account object for an account identified by an account id
 	@param acct_name The account id
 	@return the account object if it exists, NULL otherwise

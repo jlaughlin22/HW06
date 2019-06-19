@@ -31,7 +31,6 @@ protected:
 	*/
 	std::string get_fees()
 	{
-		std::cout << "TEST\n";
 		int overdraft, charge;
 		if(customer->get_cust_type() == "senior"){
 			charge = dynamic_cast<Senior*>(customer)->get_check_charge();
@@ -44,7 +43,6 @@ protected:
 			overdraft = dynamic_cast<Student*>(customer)->get_overdraft();
 		}
 		std::stringstream ss;
-		std::cout << "Check Charge: $" << charge << " Overdraft Fee: $" << overdraft;
 		ss << "Check Charge: $" << charge << " Overdraft Fee: $" << overdraft;
 		return ss.str();
 	}
@@ -57,7 +55,6 @@ protected:
 	void add_interest(double interest) {
 		double amt = balance*interest;
 		balance = balance + amt;
-		std::cout << "TEST\n";
 		std::string fees = get_fees();
 		Transaction *tran = NULL;
 		tran = new Transaction(account_number, "Interest", amt, fees);
@@ -69,12 +66,10 @@ public:
 	Constructor requires a customer to create an account
 	Balance always starts with 0 when account is created.
 	*/
-	Account(Customer *cust, int id) : customer(cust), account_number(1000), balance(0) {}
+	Account(Customer *cust, int id) : customer(cust), account_number(idNum()), balance(0) {}
 
 	int idNum(){
 		std::string hold = std::to_string((rand()%9)+1);
-		hold += std::to_string(rand()%10);
-		hold += std::to_string(rand()%10);
 		hold += std::to_string(rand()%10);
 		hold += std::to_string(rand()%10);
 		hold += std::to_string(rand()%10);
@@ -121,11 +116,15 @@ public:
 	virtual std::string to_string() {
 		std::stringstream ss; // for composing the string that describes this account
 		ss << "Name: " << customer->get_name() << std::endl;
-		ss << " Age: " << customer->get_age() << std:: endl;
-		ss << " Address: " << customer->get_address() << std::endl;
-		ss << " Telephone Number: " << customer->get_telephone_number() << std::endl;
-		ss << "  Balance: " << balance << std::endl;
-		ss << "  Account ID: " << account_number << std::endl;
+		ss << "Age: " << customer->get_age() << std:: endl;
+		ss << "Address: " << customer->get_address() << std::endl;
+		ss << "Telephone Number: " << customer->get_telephone_number() << std::endl;
+		ss << "Balance: " << balance << std::endl;
+		ss << "Account ID: " << account_number << std::endl;
+		ss << "List of Account Transactions:" << std::endl;
+		for (int i = 0; i < transactions.size(); i++){
+			ss << transactions[i]->process_tran() << std::endl;
+		}
 		return ss.str();
 	}
 
@@ -133,15 +132,12 @@ public:
 	Deposits amount into account
 	@param amt The deposit amount
 	*/
-	void deposit(double amt) {
-		std::cout << balance << std::endl;
+	virtual void deposit(double amt) {
 		balance += amt;
 		std::string fees = get_fees();
-		std::cout << "test";
 		Transaction *tran = NULL;
 		tran = new Transaction(account_number, "Deposit", amt, fees);
 		transactions.push_back(tran);
-		add_interest();
 	}
 
 	/**
@@ -149,7 +145,6 @@ public:
 	@param amt The withdrawal amount
 	*/
 	virtual void withdraw(double amt) {
-		std::cout << "TEST\n";
 		balance -= amt;
 		std::string fees = get_fees();
 		Transaction *tran = NULL;
