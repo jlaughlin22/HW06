@@ -12,8 +12,8 @@ class Senior: public Customer{
     //constructor
     Senior(std::string name, std::string address, std::string telephone_number, int age, int customer_number): 
         Customer(name, address, telephone_number, age, customer_number, "senior"), 
-        SAVINGS_INTEREST(8.5),
-        CHECK_INTEREST(4.00),
+        SAVINGS_INTEREST(.085),
+        CHECK_INTEREST(.040),
         CHECK_CHARGE(27.00),
         OVERDRAFT_PENALTY(30.00) {}
 

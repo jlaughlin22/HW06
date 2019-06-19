@@ -12,8 +12,8 @@ class Student: public Customer{
     //constructor
     Student(std::string name, std::string address, std::string telephone_number, int age, int customer_number): 
         Customer(name, address, telephone_number, age, customer_number, "student"),
-        SAVINGS_INTEREST(5.0),
-        CHECK_INTEREST(3.06),
+        SAVINGS_INTEREST(.050),
+        CHECK_INTEREST(.0306),
         CHECK_CHARGE(35),
         OVERDRAFT_PENALTY(30) {}
 

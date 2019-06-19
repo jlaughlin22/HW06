@@ -42,6 +42,8 @@ protected:
 			charge = dynamic_cast<Student*>(customer)->get_check_charge();
 			overdraft = dynamic_cast<Student*>(customer)->get_overdraft();
 		}
+		balance -= charge;
+		balance -= overdraft;
 		std::stringstream ss;
 		ss << "Check Charge: $" << charge << " Overdraft Fee: $" << overdraft;
 		return ss.str();

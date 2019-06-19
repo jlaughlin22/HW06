@@ -12,8 +12,8 @@ class Adult: public Customer{
     //constructor
     Adult(std::string name, std::string address, std::string telephone_number, int age, int customer_number): 
         Customer(name, address, telephone_number, age, customer_number, "adult"),
-        SAVINGS_INTEREST(3.2),
-        CHECK_INTEREST(4.65),
+        SAVINGS_INTEREST(.0302),
+        CHECK_INTEREST(.0465),
         CHECK_CHARGE(32),
         OVERDRAFT_PENALTY(30) {}
 

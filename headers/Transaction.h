@@ -26,7 +26,7 @@ public:
 	std::string process_tran()
 	{
 		std::stringstream ss;
-		ss << "Transaction: " << transaction_type << " Amount: " << amount << " " << fees;
+		ss << "Transaction: " << transaction_type << ", Amount: $" << amount << ", Fees: " << fees;
 		return ss.str();
 	}
 };
