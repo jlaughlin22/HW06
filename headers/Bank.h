@@ -38,12 +38,12 @@ private:
 	std::vector<int> find_accounts_by_name(std::string name)
 	{
 		std::vector<int> user_accounts;
-		for( int i = 0; i < customers.size(); i++){
-			std::cout << customers[i]->get_name();
-			if( customers[i]->get_name() == name ){
-				user_accounts.push_back(customers[i]->get_customer_number());
+		for( int i = 0; i < accounts.size(); i++){
+			if( accounts[i]->get_customer()->get_name() == name ){
+				user_accounts.push_back(accounts[i]->get_account());
 			}
 		}
+		std::cout << user_accounts.size();
 		return user_accounts;
 	}
 
