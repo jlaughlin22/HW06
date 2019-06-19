@@ -119,7 +119,6 @@ public:
 		std::string cust_type, std::string account_type)
 	{
 		Customer *cust;
-		
 		if(cust_type == "senior"){
 			cust = new Senior(name, address, telephone, age, customer_id);
 		}else if(cust_type == "adult"){
@@ -174,8 +173,9 @@ public:
 	*/
 	Account *get_account(int acct_number)
 	{
-		for (size_t i = 0; i < accounts.size(); i++) {
+		for (size_t i = 0; i < accounts.size(); i++){
 			if (accounts[i]->get_account() == acct_number)
+				std::cout << "";
 				return accounts[i];
 		}
 		return NULL;

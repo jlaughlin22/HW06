@@ -91,13 +91,11 @@ void List_Account(Bank &bank)
 	string name;
 	cin.ignore();
 	getline(cin, name);
-
 	vector<int> list = bank.get_account(name);
 	cout << endl;
 	for (size_t i = 0; i < list.size(); i++) {
 		Account *acct = bank.get_account(list[i]);
 		if (acct)
-			cout<<"test";
 			cout << acct->to_string();
 		cout << "---------------------------\n";
 	}
