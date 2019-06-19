@@ -4,6 +4,9 @@
 #include <vector>
 #include <sstream>
 #include "Customer.h"
+#include "Senior.h"
+#include "Student.h"
+#include "Adult.h"
 #include "Transaction.h"
 
 /**
@@ -29,12 +32,18 @@ protected:
 	std::string get_fees()
 	{
 		int overdraft, charge;
-
-		// Polymorphism: calls the correct virtual methods from the specific customer type
-		// FIXME: Get the overdraft and check charge information from this accounts customer
-
+		if(customer->get_cust_type() == "senior"){
+			charge = dynamic_cast<Senior*>(customer)->get_check_charge();
+			overdraft = dynamic_cast<Senior*>(customer)->get_overdraft();
+		}else if(customer->get_cust_type() == "adult"){
+			charge = dynamic_cast<Adult*>(customer)->get_check_charge();
+			overdraft = dynamic_cast<Adult*>(customer)->get_overdraft();
+		}else if( customer->get_cust_type() == "student"){
+			charge = dynamic_cast<Student*>(customer)->get_check_charge();
+			overdraft = dynamic_cast<Student*>(customer)->get_overdraft();
+		}
 		std::stringstream ss;
-		ss << "Check Charge: " << charge << " Overdraft Fee: " << overdraft;
+		ss << "Check Charge: $" << charge << " Overdraft Fee: $" << overdraft;
 		return ss.str();
 	}
 
@@ -57,8 +66,19 @@ public:
 	Constructor requires a customer to create an account
 	Balance always starts with 0 when account is created.
 	*/
-	Account(Customer *cust, int id) : customer(cust), account_number(id), balance(0) {}
+	Account(Customer *cust, int id) : customer(cust), account_number(idNum()), balance(0) {}
 
+	int idNum(){
+		std::string hold = std::to_string((rand()%9)+1);
+		hold += std::to_string(rand()%10);
+		hold += std::to_string(rand()%10);
+		hold += std::to_string(rand()%10);
+		hold += std::to_string(rand()%10);
+		hold += std::to_string(rand()%10);
+		hold += std::to_string(rand()%10);
+		hold += std::to_string(rand()%10);
+		return std::stoi(hold,nullptr);
+	}
 	/**
 	Generic accesser and setter methods for properties customer, balance, and account_number
 	*/
@@ -101,7 +121,6 @@ public:
 		ss << " Age: " << customer->get_age() << std:: endl;
 		ss << " Address: " << customer->get_address() << std::endl;
 		ss << " Telephone Number: " << customer->get_telephone_number() << std::endl;
-		ss << " Type of Customer: " << customer->getCustType() << std::endl;
 		ss << "  Balance: " << balance << std::endl;
 		ss << "  Account ID: " << account_number << std::endl;
 		return ss.str();
@@ -117,6 +136,7 @@ public:
 		Transaction *tran = NULL;
 		tran = new Transaction(account_number, "Deposit", amt, fees);
 		transactions.push_back(tran);
+		add_interest();
 	}
 
 	/**
@@ -129,6 +149,7 @@ public:
 		Transaction *tran = NULL;
 		tran = new Transaction(account_number, "Withdrawal", amt, fees);
 		transactions.push_back(tran);
+		add_interest();
 	}
 
 	// We want the Savings_Account and Checking_Account to implement this.

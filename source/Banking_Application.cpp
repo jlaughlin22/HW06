@@ -9,6 +9,8 @@
 #include <vector>
 #include "Bank.h"
 #include "readint.h"
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
@@ -135,6 +137,7 @@ void Make_Withdrawal(Bank &bank)
 
 int main()
 {
+	srand(time(NULL));
 	Bank bank; // We create the bank
 
 	// Display menu for banking activites

@@ -18,6 +18,7 @@ class Customer
     std::string telephone_number;
     int age;
     std::string customer_number;
+    std::string cust_type;
 
     public:
     Customer(std::string name, std::string address, std::string telephone_number, int age, int customer_number){
@@ -26,6 +27,15 @@ class Customer
         this->telephone_number = telephone_number;
         this->age = age;
         this->customer_number = customer_number;
+    }
+
+    Customer(std::string name, std::string address, std::string telephone_number, int age, int customer_number, std::string cust_type){
+        this->name = name;
+        this->address = address;
+        this->telephone_number = telephone_number;
+        this->age = age;
+        this->customer_number = customer_number;
+        this->cust_type = cust_type;
     }
 
     std::string get_name(){
@@ -47,6 +57,10 @@ class Customer
     std::string get_customer_number(){
         return customer_number;
     }
+    
+    std::string get_cust_type(){
+        return cust_type;
+    }
 
     void set_name(std::string name){
         this->name = name;        
@@ -64,10 +78,14 @@ class Customer
         this->telephone_number = telephone_number;
     }
 
-
     void set_customer_number(int customer_number){
         this->customer_number = customer_number;
     }
+    virtual double get_check_charge() = 0;
+    virtual double get_overdraft() = 0;
+    virtual double get_savings_interest() = 0;
+    virtual double get_check_interest() = 0;
+
 };
 
 

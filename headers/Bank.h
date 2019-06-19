@@ -11,13 +11,13 @@
 #include "Student.h"
 #include <ctime>
 #include <cstdlib>
-#include <typeinfo>
 
 /**
 The CS273 Bank has Accounts and Customers
 
 @author: Ed Walker
 */
+
 class Bank
 {
 private:
@@ -37,12 +37,14 @@ private:
 	*/
 	std::vector<int> find_accounts_by_name(std::string name)
 	{
+		std::cout << name;
 		std::vector<int> user_accounts;
-
-		for( int i = 0; i < accounts.size(); i++)
-			if( accounts[i]->get_customer()->get_name() == name )
+		for( int i = 0; i < accounts.size(); i++){
+			std::cout << accounts[i]->get_customer()->get_name();
+			if( accounts[i]->get_customer()->get_name() == name ){
 				user_accounts.push_back(accounts[i]->get_account());
-
+			}
+		}
 		return user_accounts;
 	}
 
@@ -68,18 +70,17 @@ private:
 	Account * add_account (Customer *cust, std::string account_type)
 	{
 		Account *acct = NULL;
-
-		if(typeid(*(cust)) == typeid(Senior) && account_type == "checking"){
+		if(cust->get_cust_type() == "senior" && account_type == "checking"){
 			acct = new Checking_Account(cust, account_id);
-		}else if(typeid(*(cust)) == typeid(Senior)  && account_type == "savings"){
+		}else if(cust->get_cust_type() == "senior" && account_type == "savings"){
 			acct = new Savings_Account(cust, account_id);
-		}else if(typeid(*(cust)) == typeid(Adult)  && account_type == "checking"){
+		}else if(cust->get_cust_type() == "adult" && account_type == "checking"){
 			acct = new Checking_Account(cust, account_id);
-		}else if(typeid(*(cust)) == typeid(Adult)  && account_type == "savings"){
+		}else if(cust->get_cust_type() == "adult" && account_type == "savings"){
 			acct = new Savings_Account(cust, account_id);
-		}else if(typeid(*(cust)) == typeid(Student)  && account_type == "checking"){
+		}else if(cust->get_cust_type() == "student" && account_type == "checking"){
 			acct = new Checking_Account(cust, account_id);
-		}else if(typeid(*(cust)) == typeid(Student)  && account_type == "savings"){
+		}else if(cust->get_cust_type() == "student" && account_type == "savings"){
 			acct = new Savings_Account(cust, account_id);
 		}
 		return acct;
