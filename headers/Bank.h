@@ -37,12 +37,11 @@ private:
 	*/
 	std::vector<int> find_accounts_by_name(std::string name)
 	{
-		std::cout << name;
 		std::vector<int> user_accounts;
-		for( int i = 0; i < accounts.size(); i++){
-			std::cout << accounts[i]->get_customer()->get_name();
-			if( accounts[i]->get_customer()->get_name() == name ){
-				user_accounts.push_back(accounts[i]->get_account());
+		for( int i = 0; i < customers.size(); i++){
+			std::cout << customers[i]->get_name();
+			if( customers[i]->get_name() == name ){
+				user_accounts.push_back(customers[i]->get_customer_number());
 			}
 		}
 		return user_accounts;
@@ -138,10 +137,18 @@ public:
 	*/
 	void make_deposit(int acct_number, double amt) 
 	{
+		std::cout << "TEST\n";
 		Account *acct = get_account(acct_number);
-		if (acct) {
-			acct->deposit(amt);
-		} 
+		//for(int i = 0; i < customers.size(); i++){
+			std::cout << "TEST\n";
+			//if ((customers[i]->get_customer_number()) == acct->get_account()) {
+				acct->deposit(amt);
+				
+				//accounts[i]->get_balance();
+				return;
+			//}
+		//}
+		
 	}
 
 	/** 
@@ -151,8 +158,10 @@ public:
 	*/
 	void make_withdrawal(int acct_number, double amt) 
 	{
+		
 		Account *acct = get_account(acct_number);
 		if (acct) {
+			std::cout << "TEST\n";
 			acct->withdraw(amt);
 		}
 	}

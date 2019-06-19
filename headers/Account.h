@@ -31,6 +31,7 @@ protected:
 	*/
 	std::string get_fees()
 	{
+		std::cout << "TEST\n";
 		int overdraft, charge;
 		if(customer->get_cust_type() == "senior"){
 			charge = dynamic_cast<Senior*>(customer)->get_check_charge();
@@ -43,6 +44,7 @@ protected:
 			overdraft = dynamic_cast<Student*>(customer)->get_overdraft();
 		}
 		std::stringstream ss;
+		std::cout << "Check Charge: $" << charge << " Overdraft Fee: $" << overdraft;
 		ss << "Check Charge: $" << charge << " Overdraft Fee: $" << overdraft;
 		return ss.str();
 	}
@@ -55,6 +57,7 @@ protected:
 	void add_interest(double interest) {
 		double amt = balance*interest;
 		balance = balance + amt;
+		std::cout << "TEST\n";
 		std::string fees = get_fees();
 		Transaction *tran = NULL;
 		tran = new Transaction(account_number, "Interest", amt, fees);
@@ -66,7 +69,7 @@ public:
 	Constructor requires a customer to create an account
 	Balance always starts with 0 when account is created.
 	*/
-	Account(Customer *cust, int id) : customer(cust), account_number(idNum()), balance(0) {}
+	Account(Customer *cust, int id) : customer(cust), account_number(1000), balance(0) {}
 
 	int idNum(){
 		std::string hold = std::to_string((rand()%9)+1);
@@ -130,9 +133,11 @@ public:
 	Deposits amount into account
 	@param amt The deposit amount
 	*/
-	virtual void deposit(double amt) {
+	void deposit(double amt) {
+		std::cout << balance << std::endl;
 		balance += amt;
 		std::string fees = get_fees();
+		std::cout << "test";
 		Transaction *tran = NULL;
 		tran = new Transaction(account_number, "Deposit", amt, fees);
 		transactions.push_back(tran);
@@ -144,6 +149,7 @@ public:
 	@param amt The withdrawal amount
 	*/
 	virtual void withdraw(double amt) {
+		std::cout << "TEST\n";
 		balance -= amt;
 		std::string fees = get_fees();
 		Transaction *tran = NULL;

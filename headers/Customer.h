@@ -17,7 +17,7 @@ class Customer
     std::string address;
     std::string telephone_number;
     int age;
-    std::string customer_number;
+    int customer_number;
     std::string cust_type;
 
     public:
@@ -54,7 +54,7 @@ class Customer
         return telephone_number;
     }
 
-    std::string get_customer_number(){
+    int get_customer_number(){
         return customer_number;
     }
     
